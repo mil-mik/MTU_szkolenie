@@ -5,3 +5,6 @@ class MainPOM(base_pom.PageObjectModelBase):
     @property
     def default_url(self):
         return f"{self.env.url_ui}"
+
+    def login(self):
+        ...
