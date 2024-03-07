@@ -11,7 +11,10 @@ class PlaywrightConfig(pydantic_settings.BaseSettings):
     headless: bool = True
     navigation_timeout_sec: int = 120
     elements_timeout_sec: int = 60
-
+    tracing_enable: bool = True
+    tracing_screenshots: bool = True
+    tracing_snapshots: bool = True
+    
 
 class EnvConfig(pydantic_settings.BaseSettings):
     model_config = pydantic_settings.SettingsConfigDict(
