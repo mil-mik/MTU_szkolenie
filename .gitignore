@@ -1,1 +1,6 @@
 .venv
+.env
+.idea
+artifacts
+sandbox*
+__pycache__
