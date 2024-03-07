@@ -124,5 +124,6 @@ def playwright_page(
     browser_context.close()
 
     if video_path and video_path.exists():
+        log().debug("Start recording video")
         new_video_path = f"{artifact_file_name}{video_path.suffix}"
         video_path.rename(new_video_path)
