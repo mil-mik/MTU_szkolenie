@@ -4,10 +4,12 @@ import sys
 import pathlib
 from datetime import datetime
 
+
 sys.path.append(".")
 
 from src import configs
 from src import loggers
+from src.page_object_models.trello_page import TrelloPage
 import playwright.sync_api as playwright
 
 
@@ -127,3 +129,9 @@ def playwright_page(
         log().debug("Start recording video")
         new_video_path = f"{artifact_file_name}{video_path.suffix}"
         video_path.rename(new_video_path)
+
+
+@pytest.fixture()
+def trello_page(playwright_page: playwright.Page) -> TrelloPage:
+    return TrelloPage(page=playwright_page)
+
