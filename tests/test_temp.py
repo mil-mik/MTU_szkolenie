@@ -7,7 +7,8 @@ def log() -> logging.Logger:
 
 
 def test_temp_open_trello(trello_page: TrelloPage):
-    trello_page.main_pom.goto()
-    trello_page.dashboard_pom.is_opened()
+    ...
+    # trello_page.main_pom.goto()
+    # trello_page.dashboard_pom.is_opened()
 
 

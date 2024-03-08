@@ -1,3 +1,5 @@
+from playwright.async_api import expect
+
 from src.page_object_models import base_pom
 
 

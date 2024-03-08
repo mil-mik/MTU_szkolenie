@@ -1,0 +1,3 @@
+to install:
+pydantic pydantic-settings pytest playwright
+pytest-check

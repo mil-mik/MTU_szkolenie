@@ -9,7 +9,7 @@ import yaml
 
 class DatedFileHandler(logging.FileHandler):
     def __init__(self, filename, mode="a", encoding=None, delay=False, errors=None):
-        dated_filename = datetime.utcnow().strftime(str(filename))
+        dated_filename = datetime.now().strftime(str(filename))
         pathlib.Path(dated_filename).parent.mkdir(parents=True, exist_ok=True)
         super().__init__(
             dated_filename,

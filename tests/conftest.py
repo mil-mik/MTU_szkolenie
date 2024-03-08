@@ -30,7 +30,7 @@ def env_config() -> configs.EnvConfig:
 @pytest.fixture(scope="session")
 def session_timestamp() -> str:
     """Provides a session timestamp used in file names"""
-    now = datetime.utcnow()
+    now = datetime.now()
     return now.strftime("%Y%m%d%H%M%S")
 
 
