@@ -1,7 +1,15 @@
+import logging
+import time
+import allure
+
 import playwright
 from playwright.sync_api import expect
 
 from src.page_object_models import base_pom
+
+
+def log() -> logging.Logger:
+    return logging.getLogger(__name__)
 
 
 class DashboardPOM(base_pom.PageObjectModelBase):
@@ -25,7 +33,18 @@ class DashboardPOM(base_pom.PageObjectModelBase):
 
     def remove_task(self, task_name: str = "task1"):
         self.page.get_by_test_id("list-card-composer-add-card-button").click()
+        time.sleep(1)
         self.page.get_by_test_id("lists").locator("div").filter(has_text=f"{task_name}").nth(2).click()
         self.page.get_by_role("link", name=" Zarchiwizuj").click()
         self.page.get_by_role("link", name=" Usuń").click()
         self.page.get_by_role("button", name="Skasuj").click()
+
+    @allure.step("Check for doing")
+    def is_doing_visible(self):
+        log().debug('Check for doing')
+        expect(self.page.locator("h2").filter(has_text="Do zrobienia")).to_be_visible()
+
+    def is_done_visible(self):
+        log().debug('Check for done')
+        expect(self.page.locator("h2").filter(has_text="Zrobione23")).to_be_visible()
+        # expect(self.page.locator("h2").filter(has_text="Zrobione")).to_be_visible()
