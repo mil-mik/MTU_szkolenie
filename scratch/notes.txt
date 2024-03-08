@@ -3,7 +3,7 @@ pydantic(modele do db) pydantic-settings pytest playwright
 pytest-check
 ruff
 faker
-pre-commit
+pre-commit (może wypchnąć statyczny html - na github pages)
 
 
 notes allure:
