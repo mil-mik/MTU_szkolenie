@@ -2,6 +2,7 @@ to install:
 pydantic(modele do db) pydantic-settings pytest playwright
 pytest-check
 ruff
+faker
 
 
 notes allure:
