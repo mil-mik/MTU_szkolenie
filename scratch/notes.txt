@@ -10,12 +10,16 @@ notes allure:
 epic kolekcjonuje feature'y
 """""" == allure.description
 
+python x-dist
+github actions
 
-innovation sprint - needed:
+
+innovation sprint - needed: (normalization)
 - server allur'owe
 - api do precondition (user settings)
 - switch yaq users
-- @step own
+- @step own -> allure's decorator
+
 
 ##
 pydantic + db -> user/pass/
