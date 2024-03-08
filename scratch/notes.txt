@@ -1,3 +1,15 @@
 to install:
 pydantic pydantic-settings pytest playwright
 pytest-check
+
+
+notes allure:
+epic kolekcjonuje feature'y
+"""""" == allure.description
+
+
+innovation sprint:
+- server allurowe
+- api do precondition (user settings)
+- switch yaq users
+- @step own
