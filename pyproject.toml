@@ -23,3 +23,6 @@ markers = [
 testpaths = [
     "tests",
 ]
+pythonpath = [
+    "",
+]
