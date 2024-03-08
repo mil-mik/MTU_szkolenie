@@ -1,6 +1,7 @@
 to install:
-pydantic pydantic-settings pytest playwright
+pydantic(modele do db) pydantic-settings pytest playwright
 pytest-check
+ruff
 
 
 notes allure:
@@ -13,3 +14,8 @@ innovation sprint - needed:
 - api do precondition (user settings)
 - switch yaq users
 - @step own
+
+##
+pydantic + db -> user/pass/
+kontrola pipeline'a w połączeniu z
+AWS -> parameters store
