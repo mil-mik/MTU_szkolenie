@@ -3,6 +3,7 @@ pydantic(modele do db) pydantic-settings pytest playwright
 pytest-check
 ruff
 faker
+pre-commit
 
 
 notes allure:
