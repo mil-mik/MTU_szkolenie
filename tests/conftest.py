@@ -4,6 +4,7 @@ import pathlib
 from datetime import datetime
 from src import configs
 from src import loggers
+from src.page_object_models.trello.main_pom import MainPOM
 from src.page_object_models.trello_page import TrelloPage
 import playwright.sync_api as playwright
 
@@ -55,7 +56,7 @@ def reporting_setup(env_config: configs.EnvConfig):
     loggers.configure_logging_from_yaml_file()
 
 
-@pytest.fixture()
+@pytest.fixture(scope="session")
 def playwright_browser(
     playwright_config: configs.PlaywrightConfig, env_config: configs.PlaywrightConfig
 ) -> playwright.Browser:
@@ -65,8 +66,9 @@ def playwright_browser(
             browser = playwright_obj.chromium.launch(
                 channel=playwright_config.browser,
                 headless=bool(playwright_config.headless),
-                args=["--disable-gpu"],
+                args=["--disable-gpu", "--start-maximized"],
                 traces_dir=env_config.artifacts_dir,
+                slow_mo=250
             )
         else:
             raise SystemError(f"'{playwright_config.browser}' is not supported (yet)")
@@ -77,7 +79,7 @@ def playwright_browser(
             browser.close()
 
 
-@pytest.fixture()
+@pytest.fixture(scope="session")
 def playwright_page(
     request: pytest.FixtureRequest,
     playwright_browser: playwright.Browser,
@@ -85,7 +87,7 @@ def playwright_page(
     env_config: configs.EnvConfig,
     session_timestamp: str,
 ) -> playwright.Page:
-    browser_context = playwright_browser.new_context(record_video_dir=env_config.artifacts_dir)
+    browser_context = playwright_browser.new_context(record_video_dir=env_config.artifacts_dir, no_viewport=True)
 
     new_page: playwright.Page = browser_context.new_page()
 
@@ -126,7 +128,14 @@ def playwright_page(
         video_path.rename(new_video_path)
 
 
-@pytest.fixture()
-def trello_page(playwright_page: playwright.Page) -> TrelloPage:
-    return TrelloPage(page=playwright_page)
+@pytest.fixture(scope="session")
+def playwright_session_page(playwright_page: playwright.Page) -> playwright.Page:
+    pom = MainPOM(page=playwright_page)
+    pom.goto()
+    pom.login_user(login="milosz.mika@yahoo.com", password="Qwerty1234$")
+    yield playwright_page
 
+
+@pytest.fixture()
+def trello_page(playwright_session_page: playwright.Page) -> TrelloPage:
+    return TrelloPage(page=playwright_session_page)

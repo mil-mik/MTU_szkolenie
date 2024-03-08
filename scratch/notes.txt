@@ -19,3 +19,7 @@ innovation sprint - needed:
 pydantic + db -> user/pass/
 kontrola pipeline'a w połączeniu z
 AWS -> parameters store
+
+
+* drag & drop
+* upload file

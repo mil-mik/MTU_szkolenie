@@ -1,10 +1,7 @@
 import logging
 import time
 import allure
-
-import playwright
 from playwright.sync_api import expect
-
 from src.page_object_models import base_pom
 
 
@@ -27,7 +24,7 @@ class DashboardPOM(base_pom.PageObjectModelBase):
         self.page.wait_for_url(self.default_url)
 
     def add_new_task(self, task_name: str = "task1"):
-        self.page.get_by_role("link", name="tab1 ").click()
+        # self.page.get_by_role("link", name="tab1 ").click()
         self.page.locator("li").filter(has_text="Do zrobieniaDo").get_by_test_id("list-add-card-button").click()
         self.page.get_by_test_id("list-card-composer-textarea").fill(f"{task_name}")
 
@@ -46,5 +43,11 @@ class DashboardPOM(base_pom.PageObjectModelBase):
 
     def is_done_visible(self):
         log().debug('Check for done')
-        expect(self.page.locator("h2").filter(has_text="Zrobione23")).to_be_visible()
-        # expect(self.page.locator("h2").filter(has_text="Zrobione")).to_be_visible()
+        # expect(self.page.locator("h2").filter(has_text="Zrobione23")).to_be_visible()
+        expect(self.page.locator("h2").filter(has_text="Zrobione")).to_be_visible()
+
+    def drag_task_drop(self):
+        log().debug('Dragging task to second column')
+        self.page.get_by_role("link", name="tab1 ").click()
+        self.page.get_by_role("link", name="new task").drag_to(self.page.locator("h2").filter(has_text="Zrobione"))
+        self.page.get_by_role("link", name="new task").drag_to(self.page.locator("h2").filter(has_text="Do zrobienia"))
