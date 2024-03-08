@@ -8,8 +8,8 @@ epic kolekcjonuje feature'y
 """""" == allure.description
 
 
-innovation sprint:
-- server allurowe
+innovation sprint - needed:
+- server allur'owe
 - api do precondition (user settings)
 - switch yaq users
 - @step own
